@@ -30,7 +30,8 @@ test:
     - javaproperties
   commands:
     - pip check
-    - TZ=America/New_York pytest -v test
+    - TZ=America/New_York pytest -v test  # [unix]
+    - set TZ=America/New_York && pytest -v test   # [win]
   requires:
     - pip
     - pytest
