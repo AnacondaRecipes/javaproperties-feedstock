@@ -1,0 +1,53 @@
+{% set name = "javaproperties" %}
+{% set version = "0.5.2" %} 
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 68add3438bd24d6e32665cad91f254fc82a51bf905e21f3f424a085c79904fb3
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - setuptools
+    - wheel
+    - python
+    - pip
+  run:
+    - python
+    - six >=1.4,<2
+
+test:
+  source_files:
+    - test
+  imports:
+    - javaproperties
+  commands:
+    - pip check
+    - TZ=America/New_York pytest -v test  # [unix]
+  requires:
+    - pip
+    - pytest
+    - python-dateutil
+    - pytest-mock
+
+about:
+  home: https://github.com/jwodder/javaproperties
+  summary: Read & write Java .properties files
+  description: Read & write Java .properties files
+  license_family: MIT
+  license: MIT
+  license_file: LICENSE
+  description: Read & write Java .properties files
+  dev_url: https://github.com/jwodder/javaproperties
+  doc_url: https://javaproperties.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - janjagusch
