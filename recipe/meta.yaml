@@ -16,10 +16,9 @@ build:
 
 requirements:
   host:
-    - setuptools
-    - wheel
-    - python
     - pip
+    - python
+    - hatchling
   run:
     - python
 
